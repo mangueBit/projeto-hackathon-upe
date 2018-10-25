@@ -1,0 +1,21 @@
+<div class="row no-margin">
+    <%= render '/static_pages/topbar' %>
+</div>
+<div class="row no-margin">
+    <div class="col-md-2"><%= render '/static_pages/menu' %></div>
+    <div class="col-md-7 sensor_map no-padding"><%= render '/google_maps/map'%></div>
+    <div class="col-md-3">
+        <div class="sensor_details">
+            <%= render '/sensor/details' %>
+        </div>
+        <hr>
+        <div class="graph">
+            <%= render '/sensor/graph1' %>
+        </div>
+        <hr>
+    </div>
+    
+</div>
+
+
+

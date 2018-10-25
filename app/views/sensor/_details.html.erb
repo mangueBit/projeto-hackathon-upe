@@ -1,0 +1,23 @@
+<h2>Detalhes do sensor: </h2>
+<% if @sensor.nil? %>
+<h5>Selecione no mapa ao lado</h5>
+<% else %>
+<hr>
+<h6>Status</h6>
+<div class="row no-margin">
+    <div class="col-md-9">Umidade relativa do solo:</div>
+    <div class="col-md-2"><b><%= @sensor.umidade %> %</b></div>
+</div>
+<div class="row no-margin">
+    <div class="col-md-9">Temperatura local:</div>
+    <div class="col-md-2"><b><%= @sensor.temperatura %></b></div>
+</div>
+<div class="row no-margin">
+    <div class="col-md-9">Nível de luminosidade:</div>
+    <div class="col-md-2"><b><%= @sensor.luminosidade %></b></div>
+</div>
+<div class="row no-margin">
+    <div class="col-md-9">Ph do solo:</div>
+    <div class="col-md-2"><b><%= @sensor.ph %></b></div>
+</div>
+<% end %>

@@ -1,0 +1,33 @@
+// Place all the styles related to the static_pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
+.sensor_map{
+    height: 90vh;
+}
+
+.topbar{
+    height: 10vh;
+    width: 100%;
+}
+
+.sensor_details{
+    height: 35vh;
+}
+
+.graph{
+    height: 20vh;
+}
+
+.paragraph{
+    padding: 5px;
+}
+
+.no-margin{
+    margin: 0px !important;
+}
+
+.no-padding{
+    padding: 0px !important;
+}
