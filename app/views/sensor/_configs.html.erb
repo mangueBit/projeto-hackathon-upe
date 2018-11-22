@@ -1,0 +1,57 @@
+<form class="config_form" data-sensor_id="<%= @sensor.id %>">
+    
+<h6>Configure o sensor:</h6>
+<div class="row no-margin no-padding">
+    <div class="col-md-8">Umidade relativa do solo:</div>
+</div>
+<div class="row no-margin no-padding">
+    <div class="col-md-12">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control umidade" placeholder="25" aria-label="Porcentagem de umidade do solo utilizada como parâmetro" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn config-save" data-input_reference="umidade" type="button">Salvar</button>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row no-margin">
+    <div class="col-md-8">Temperatura local:</div>
+</div>
+<div class="row no-margin no-padding">
+    <div class="col-md-12">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control temperatura" placeholder="28" aria-label="Temperatura utilizada como parâmetro" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn config-save" data-input_reference="temperatura" type="button">Salvar</button>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row no-margin">
+    <div class="col-md-8">Nível de luminosidade:</div>
+</div>
+<div class="row no-margin no-padding">
+    <div class="col-md-12">
+    <div class="input-group mb-3">
+          <input type="text" class="form-control luminosidade" placeholder="1440" aria-label="Quantidade de lumens ideal para ser utilizado como parâmetro" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn config-save" data-input_reference="luminosidade" type="button">Salvar</button>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row no-margin">
+    <div class="col-md-8">Ph do solo:</div>
+</div>
+<div class="row no-margin no-padding">
+    <div class="col-md-12">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control ph" placeholder="5,2" aria-label="Ph ideal para o solo" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn config-save" data-input_reference="ph" type="button">Salvar</button>
+          </div>
+        </div>
+    </div>
+</div>
+</form>
+<%= javascript_include_tag 'sensor/configs' %>

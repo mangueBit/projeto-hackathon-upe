@@ -1,18 +1,48 @@
-<div class="row no-margin">
+<div class="row no-margin white padding-top-small">
     <h4>Filtros: </h4>
 </div>
 <div class="row no-margin">
     <div class="col-md-12">
-        <p><%= text_field_tag "search", nil, placeholder: "Procurar sensor" %></p>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Cod. sensor" aria-label="ID do sensor" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn" type="button">Procurar</button>
+          </div>
+        </div>
     </div>
 </div>
 <hr>
-<div class="row no-margin">
+<div class="row no-margin white">
     <h5>Região</h5>
 </div>
-<div class="row no-margin">
+<div class="row no-margin white">
     <div class="col-md-10">
         Todas as regiões
+    </div>
+    <div class="col-md-1">
+        <%= fa_icon "angle-right" %>
+    </div>
+</div>
+<hr>
+<div class="row no-margin white">
+    <h5>Sensores</h5>
+</div>
+<div class="row no-margin white">
+    <div class="col-md-10">
+        Todos os sensores
+    </div>
+    <div class="col-md-1">
+        <%= fa_icon "angle-right" %>
+    </div>
+</div>
+<hr>
+
+<div class="row no-margin white">
+    <h5>Centrais</h5>
+</div>
+<div class="row no-margin white">
+    <div class="col-md-10">
+        Todas as centrais
     </div>
     <div class="col-md-1">
         <%= fa_icon "angle-right" %>

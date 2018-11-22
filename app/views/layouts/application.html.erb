@@ -7,6 +7,46 @@
   <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwoSdIIzH6A7a0wfSoqe7bztikrLeXWXs&callback=initMap&libraries=places" async defer></script>
+    <script>
+      var map;
+      var sensores_ativos = {}
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -8.094355, lng: -34.9230847},
+          zoom: 14
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(`Sua localização: <br> Latitude: ${position.coords.latitude} <br> Longitude: ${position.coords.longitude}`);
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+      
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Erro: Sem permissão para acessar localização.' :
+                              'Erro: Seu navegador não permite geolocalização.');
+        infoWindow.open(map);
+      }
+      </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -23,10 +63,14 @@
         var options = {
           pieHole: 0.5,
           pieSliceTextStyle: {
-            color: 'black',
+            color: 'white',
           },
           legend: 'none',
           title: 'Uptime',
+          backgroundColor: '#068587',
+          titleTextStyle: {
+              color: 'white'
+          }
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('donut_single'));

@@ -1,23 +1,40 @@
-<h2>Detalhes do sensor: </h2>
+<style>
+    .loader {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+
 <% if @sensor.nil? %>
+<h2>Detalhes do sensor: </h2>
 <h5>Selecione no mapa ao lado</h5>
 <% else %>
+<h2>Detalhes do sensor: <%= @sensor.code %></h2>
 <hr>
 <h6>Status</h6>
-<div class="row no-margin">
-    <div class="col-md-9">Umidade relativa do solo:</div>
-    <div class="col-md-2"><b><%= @sensor.umidade %> %</b></div>
+<div class="row no-margin no-padding">
+    <div class="col-md-8">Umidade relativa do solo:</div>
+    <div class="col-md-4"><b class="sensor_umidade_<%= @sensor.id %>"><div class="loader"></div></b></div>
 </div>
 <div class="row no-margin">
-    <div class="col-md-9">Temperatura local:</div>
-    <div class="col-md-2"><b><%= @sensor.temperatura %></b></div>
+    <div class="col-md-8">Temperatura local:</div>
+    <div class="col-md-4"><b class="sensor_temperatura_<%= @sensor.id %>"><div class="loader"></div></b></div>
 </div>
 <div class="row no-margin">
-    <div class="col-md-9">Nível de luminosidade:</div>
-    <div class="col-md-2"><b><%= @sensor.luminosidade %></b></div>
+    <div class="col-md-8">Nível de luminosidade:</div>
+    <div class="col-md-4"><b class="sensor_luminosidade_<%= @sensor.id %>"><div class="loader"></div></b></div>
 </div>
 <div class="row no-margin">
-    <div class="col-md-9">Ph do solo:</div>
-    <div class="col-md-2"><b><%= @sensor.ph %></b></div>
+    <div class="col-md-8">Ph do solo:</div>
+    <div class="col-md-4"><b class="sensor_ph_<%= @sensor.id %>"><div class="loader"></div></b></div>
 </div>
 <% end %>
