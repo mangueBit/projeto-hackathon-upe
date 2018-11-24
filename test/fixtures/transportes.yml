@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  used_time: MyString
+  history: MyString
+  ratio: MyString
+
+two:
+  used_time: MyString
+  history: MyString
+  ratio: MyString

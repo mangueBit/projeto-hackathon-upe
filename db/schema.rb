@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_004409) do
+ActiveRecord::Schema.define(version: 2018_11_24_200056) do
 
   create_table "leituras", force: :cascade do |t|
-    t.string "umidade"
-    t.string "temperatura"
-    t.string "luminosidade"
-    t.string "ph"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sensor_id"
+    t.string "tipo"
+    t.string "bateria_amount"
+    t.integer "transporte_id"
   end
 
   create_table "sensor_configs", force: :cascade do |t|
@@ -36,6 +35,17 @@ ActiveRecord::Schema.define(version: 2018_11_20_004409) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "code"
+  end
+
+  create_table "transportes", force: :cascade do |t|
+    t.string "used_time"
+    t.string "history"
+    t.string "ratio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "sensor_id"
+    t.string "code"
+    t.integer "bateria"
   end
 
 end
