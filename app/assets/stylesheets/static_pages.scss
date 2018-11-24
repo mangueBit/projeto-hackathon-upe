@@ -65,3 +65,31 @@
 .no-padding{
     padding: 0px !important;
 }
+
+.applyBorder{
+    border:2px solid black;
+}
+
+.battery{
+    text-align:center;
+
+}
+
+.chart{
+    text-align:center;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+.chargingTime{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+.batteryInfo{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}

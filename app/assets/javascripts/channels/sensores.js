@@ -8,6 +8,7 @@ App.cable = ActionCable.createConsumer();
 
 App.messages = App.cable.subscriptions.create('SensoresChannel', {  
   received: function(data) {
+    console.log(data)
     json = JSON.parse(data)
     latlong = json["local"].split("_")
     lat = parseFloat(latlong[0].replace('/', ""))
@@ -18,10 +19,10 @@ App.messages = App.cable.subscriptions.create('SensoresChannel', {
     marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
-          title: `Sensor: ${json["sensor_id"]}`
+          title: `Sensor: ${json["code"]}`
         });
     google.maps.event.addListener(marker, 'click', function(event) {
-          load_info(json["sensor_id"]);
+          load_info(json["code"]);
           load_label(json,lat,long)
         });
     if (sensores_ativos[`${json["sensor_id"]}`] != null){
@@ -35,15 +36,7 @@ App.messages = App.cable.subscriptions.create('SensoresChannel', {
     if ($(`.sensor_luminosidade_${json["sensor_id"]}`) != undefined){
       $(`.sensor_luminosidade_${json["sensor_id"]}`).html(`${json["luminosidade"]} lux`)
     }
-    if ($(`.sensor_umidade_${json["sensor_id"]}`) != undefined){
-      $(`.sensor_umidade_${json["sensor_id"]}`).html(`${json["umidade"]} %`)
-    }
-    if ($(`.sensor_ph_${json["sensor_id"]}`) != undefined){
-      $(`.sensor_ph_${json["sensor_id"]}`).html(`${json["ph"]} ph`)
-    }
-    if ($(`.sensor_temperatura_${json["sensor_id"]}`) != undefined){
-      $(`.sensor_temperatura_${json["sensor_id"]}`).html(`${json["temperatura"]} °C`)
-    }
+    
   },
 
   connected: function() {

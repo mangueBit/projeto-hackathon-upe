@@ -22,18 +22,7 @@ integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeV
     }
 </style>
 
-<% @sensor = Sensor.new %>
 
-<% transp1 = @sensor.transporte.new %>
-<% transp2 = @sensor.transporte.new %>
-<% transp3 = @sensor.transporte.new %>
-
-<%  transp1.sensor_id = "000"
-    transp1.id = "1"
-    transp2.sensor_id = "111" 
-    transp2.id = "2"
-    transp3.sensor_id = "222" 
-    transp3.id = "3" %>
 
 <% if @sensor.nil? %>
     <h2>Bike na Central: </h2>
@@ -42,10 +31,10 @@ integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeV
     <h2>Bikes:</h2>
     <hr>
     <% @sensor.transporte.each do |transporte| %>
-        <div id="select" data-toggle="modal" data-bike_id="<%= transporte.id %>" data-target="#exampleModal" class="row no-margin no-padding bikeModal">
+        <div id="select" data-toggle="modal" data-bike_id="<%= transporte.id %>" data-target="#bicycleModal" class="row no-margin no-padding bikeModal">
             <div class="col-md-8">
                 <span class="fas fa-2x fa-bicycle"></span>
-                <p style="float:right">ID: <% transporte.sensor_id %></p>
+                <p style="float:right">cod.: <%= transporte.code %></p>
             </div>
         </div>
         </br>
