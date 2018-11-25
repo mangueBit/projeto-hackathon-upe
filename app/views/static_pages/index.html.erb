@@ -10,15 +10,10 @@
     <div class="row col-md-10 no-margin no-padding">
         <%= render '/google_maps/header' %>
         <div class="col-md-9 sensor_map no-padding"><%= render '/google_maps/map'%></div>
-        <div class="col-md-3 sides-background white">
+        <div class="col-md-3 sides-background white scrolling-wrapper-side-bar">
             <div class="sensor_details">
                 <%= render '/sensor/details' %>
             </div>
-            <hr>
-            
-            <div class="sensor_config">
-            </div>
-            <hr>
         </div>
     </div>
 </div>

@@ -94,7 +94,28 @@
     border-top: none;
 }
 
-.batteryHeighModal{
-    height: 65vh;
-    padding-top: 10%;
+.pointer{
+    cursor: pointer;
+}
+
+.green{
+    color: green;
+}
+
+.red{
+    color: red;
+}
+
+.yellow{
+    color: yellow;
+}
+
+.padding-10{
+    padding-bottom: 15px;
+}
+
+.scrolling-wrapper-side-bar{
+    overflow-y: scroll;
+  white-space: nowrap;
+//   height:150px;
 }

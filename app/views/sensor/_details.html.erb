@@ -25,11 +25,12 @@ integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeV
 
 
 <% if @sensor.nil? %>
-    <h2>Bike na Central: </h2>
+    <h2>Bikes na Central: </h2>
     <h6>Selecione no mapa ao lado uma central</h6> 
 <% else %>
-    <h2>Bikes:</h2>
+    <h2>Bikes na Central:</h2>
     <hr>
+    <div>
     <% @sensor.transporte.each do |transporte| %>
         <div id="select" data-toggle="modal" data-bike_id="<%= transporte.id %>" data-target="#bicycleModal" class="row no-margin pointer no-padding bikeModal">
             <div class="col-md-8 row no-padding">
@@ -61,4 +62,5 @@ integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeV
         </br>
     <% end %>
 <% end %>
+</div>
 <%= javascript_include_tag 'sensor/details' %>

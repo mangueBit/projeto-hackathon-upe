@@ -78,7 +78,7 @@ class SensorController < ApplicationController
   
   def buildTransporte(transporte, sensorId, bateria)
     transporte.bateria = bateria
-      transporte.ratio = rand(0..1)
+      transporte.ratio = rand(0.21...1.00)
       transporte.sensor_id = sensorId
       return transporte
   end

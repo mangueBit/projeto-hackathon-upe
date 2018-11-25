@@ -1,3 +1,14 @@
+<% 
+def changeBatteryColor(battery)
+  if battery <= 31
+    return "#ff0000"
+  elsif battery <= 60
+    return "#ffff00"
+  else 
+    return "#71FB85"
+  end 
+end
+%>
 <style>
   .battery-animation {
   display: inline-block;
@@ -57,32 +68,89 @@
   position: absolute;
   bottom: 0;
   width: 5rem;
-  background: #71FB85;
+  background: <%= changeBatteryColor(@transporte.bateria) %>;
   animation: load 2.25s;
   animation-fill-mode: forwards;
 }
+.batteryPercentage{
+  position:absolute;
+  left:50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 </style>
-
-<div class="container">
-  <div class="row h-100 col-12">
-    <div class="col-3 battery">
-      <div class="battery-animation">
-          <div class="liquid"><%= @transporte.bateria %>%</div>
-        </div>
+<div class="container batteryHeighModal">
+  <fieldset>
+    <legend><h5>Histórico da bateria:</h5></legend>
+    <div class="row col-12 padding-10">
+      Código da bicicleta: &nbsp; <b> <%= @transporte.code %></b>
     </div>
-    <div class="col-9">
-       <div class="scrolling-wrapper col-12 battery">
-         <% @leituras.each do |leitura| %>
-            <div class="col-4 bikeHistoryInfo">
-              <div class="row">
-                  <%= leitura.created_at.strftime("%d/%m/%Y as %H:%M") %>
-              </div>
-              <hr>
-              <div class="row">
-                  <%= leitura.tipo %>
-              </div>
+    </br>
+    <div class="row col-12">
+     <div class="col-3 battery">
+        <div class="battery-animation">
+          
+           <div class="liquid">
+               
             </div>
-        <% end %>
+            <div class="batteryPercentage">
+                 <%= @transporte.bateria %>%
+               </div>
+        </div>
+     </div>
+     <div class="col-9 battery">
+       <div class="row col-12">
+       <div class="col-4">
+              <b>Data Hora</b>
+           </div>
+           <div class="col-4">
+              <b>Tipo</b>
+           </div>
+           <div class="col-4">
+              <b>% da bateria</b>
+           </div>
+           
+           </div>
+        <div class="row col-12 scrolling-wrapper">
+          
+           <% @leituras.each do |leitura| %>
+           <div class="col-4">
+              <%= leitura.created_at.strftime("%d/%m/%Y as %H:%M") %>
+           </div>
+           
+           <div class="col-4">
+              <%= if leitura.tipo == "in" 
+                    "Entrada"
+                  else
+                    "Saída"
+                  end
+              %>
+           </div>
+            <div class="col-4">
+              <%= leitura.bateria_amount %>
+           </div>
+           <hr>
+           <% end %>
+        </div>
+     </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        Leituras totais: 
       </div>
-  </div>
+      <div class="col-8">
+        <b><%= @leituras.length %></b>
+      </div>
+    </div>
+    <div class="row chart-line">
+      <div class="col-12">
+        Quoeficiente de bateria <b>*</b>: <b><%= Float(@transporte.ratio).round(2) %></b>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <b>*</b>: O quoeficiente de bateria é uma constante que define a relação entre tempo de carga vs. bateria carregada, identificando a saúde do equipamento.
+      </div>
+    </div>
+  </fieldset>
 </div>
