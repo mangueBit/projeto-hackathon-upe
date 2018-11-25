@@ -20,18 +20,38 @@ class SensorController < ApplicationController
   def update
     transporte = Transporte.find_by_code(params[:code_transporte])
     sensor = Sensor.find_by_code(params[:code_sensor])
+    if !sensor.nil? && leitura_params[:tipo] == "in"
+      transporte.sensor_id = nil
+      transporte.bateria = leitura_params[:bateria_amount]
+      transporte.save
+      
+      leitura = transporte.leitura.new(leitura_params)
+      leitura.sensor_id = sensor.id
+      leitura.save
+      render plain: "okers" and return
+    elsif !sensor.nil? && leitura_params[:tipo] == "out"
+      transporte.sensor_id = sensor.id
+      transporte.bateria = leitura_params[:bateria_amount]
+      transporte.save
+      
+      leitura = transporte.leitura.new(leitura_params)
+      leitura.sensor_id = sensor.id
+      leitura.save
+      render plain: "okers" and return
+    end
+    
     if transporte != nil && sensor != nil
       leitura = transporte.leitura.new(leitura_params)
+      transporte.bateria = leitura.bateria_amount
+      transporte.ratio = rand(0..1)
       transporte.sensor_id = sensor.id
       transporte.save
       leitura.sensor_id = sensor.id
       ActionCable.server.broadcast 'sensores',
         (leitura.as_json.merge!({local: sensor.local, code: sensor.id})).to_json
     else
-      if transporte.nil?
-        transporte = Transporte.new
-      end
-      transporte_leitura = transporte.leitura.new(leitura_params)
+      
+      
       if sensor.nil?
         sensor = Sensor.new
         sensor.code = params[:code_sensor]
@@ -39,11 +59,20 @@ class SensorController < ApplicationController
         sensor.tipo = "estacao"
         sensor.save
       end
-      transporte_leitura.sensor_id = sensor.id
-      transporte_leitura.save!
+      
+      if transporte.nil?
+        transporte = Transporte.new
+      end
+      transporte.bateria = leitura_params[:bateria_amount]
+      transporte.ratio = rand(0..1)
       transporte.sensor_id = sensor.id
       transporte.code = params[:code_transporte]
       transporte.save!
+      
+      transporte_leitura = transporte.leitura.new(leitura_params)
+      transporte_leitura.sensor_id = sensor.id
+      transporte_leitura.save!
+      
       ActionCable.server.broadcast 'sensores',
         (transporte_leitura.as_json.merge!({local: sensor.local, code: sensor.id})).to_json
     end

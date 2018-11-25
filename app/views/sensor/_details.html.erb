@@ -32,9 +32,14 @@ integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeV
     <hr>
     <% @sensor.transporte.each do |transporte| %>
         <div id="select" data-toggle="modal" data-bike_id="<%= transporte.id %>" data-target="#bicycleModal" class="row no-margin no-padding bikeModal">
-            <div class="col-md-8">
-                <span class="fas fa-2x fa-bicycle"></span>
-                <p style="float:right">cod.: <%= transporte.code %></p>
+            <div class="col-md-8 row no-padding">
+                <div class="col-md-3">
+                    <span class="fas fa-2x fa-bicycle"></span>
+                </div>
+                <div class="col-md-9">
+                    <p style="float:right"><b>Cod.</b> : <%= transporte.code %></p>
+                    <p style="float:right"><b>ID</b> : <%= transporte.id %></p>
+                </div>
             </div>
         </div>
         </br>

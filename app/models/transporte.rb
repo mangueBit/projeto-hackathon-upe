@@ -1,4 +1,4 @@
 class Transporte < ApplicationRecord
-    belongs_to :sensor
+    has_one :sensor
     has_many :leitura
 end

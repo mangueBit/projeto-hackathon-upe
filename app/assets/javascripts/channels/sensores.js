@@ -21,9 +21,10 @@ App.messages = App.cable.subscriptions.create('SensoresChannel', {
           map: map,
           title: `Sensor: ${json["code"]}`
         });
+    marker["code"] = json["code"]
     google.maps.event.addListener(marker, 'click', function(event) {
-          load_info(json["code"]);
-          load_label(json,lat,long)
+          //load_info($(this).data("code"));
+          load_info(this.code);
         });
     if (sensores_ativos[`${json["sensor_id"]}`] != null){
       var actual = sensores_ativos[`${json["sensor_id"]}`]
