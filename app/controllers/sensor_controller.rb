@@ -20,29 +20,19 @@ class SensorController < ApplicationController
   def update
     transporte = Transporte.find_by_code(params[:code_transporte])
     sensor = Sensor.find_by_code(params[:code_sensor])
+    
     if !sensor.nil? && leitura_params[:tipo] == "in"
-      transporte.sensor_id = nil
-      transporte.bateria = leitura_params[:bateria_amount]
-      transporte.save
-      
-      leitura = transporte.leitura.new(leitura_params)
-      leitura.sensor_id = sensor.id
-      leitura.save
-      render plain: "okers" and return
+      return parseInRequest(params, transporte, sensor)
     elsif !sensor.nil? && leitura_params[:tipo] == "out"
-      transporte.sensor_id = sensor.id
-      transporte.bateria = leitura_params[:bateria_amount]
-      transporte.save
-      
-      leitura = transporte.leitura.new(leitura_params)
-      leitura.sensor_id = sensor.id
-      leitura.save
-      render plain: "okers" and return
+     return parseOutRequest(params, transporte, sensor)
     end
     
     if transporte != nil && sensor != nil
       leitura = transporte.leitura.new(leitura_params)
       transporte.bateria = leitura.bateria_amount
+      if transporte.used_time.nil?
+        transporte.used_time = 1.seconds
+      end
       transporte.ratio = rand(0..1)
       transporte.sensor_id = sensor.id
       transporte.save
@@ -80,6 +70,29 @@ class SensorController < ApplicationController
       render plain: "okers"
   end
   
+  def parseInRequest(params, transporte, sensor)
+    transporte.sensor_id = nil
+      transporte.bateria = leitura_params[:bateria_amount]
+      transporte.save
+      
+      leitura = transporte.leitura.new(leitura_params)
+      leitura.sensor_id = sensor.id
+      leitura.save
+      render plain: "okers" and return
+  
+  end
+  
+  def parseOutRequest(params, transporte, sensor)
+     transporte.sensor_id = sensor.id
+      transporte.bateria = leitura_params[:bateria_amount]
+      transporte.save
+      
+      leitura = transporte.leitura.new(leitura_params)
+      leitura.sensor_id = sensor.id
+      leitura.save
+      render plain: "okers" and return
+  end
+  
   def register_params
     params.permit(:code,:local)
   end
@@ -96,6 +109,7 @@ class SensorController < ApplicationController
   
   def transporte_details
     @transporte = Transporte.find(params[:id])
+    @leituras = Leitura.where("transporte_id = :transpId AND (tipo = :t1 OR tipo = :t2)", {t1:"in", t2: "out", transpId: params[:id]}).order(:created_at)
   end
   
   def leitura_params

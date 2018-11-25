@@ -31,14 +31,30 @@ integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeV
     <h2>Bikes:</h2>
     <hr>
     <% @sensor.transporte.each do |transporte| %>
-        <div id="select" data-toggle="modal" data-bike_id="<%= transporte.id %>" data-target="#bicycleModal" class="row no-margin no-padding bikeModal">
+        <div id="select" data-toggle="modal" data-bike_id="<%= transporte.id %>" data-target="#bicycleModal" class="row no-margin pointer no-padding bikeModal">
             <div class="col-md-8 row no-padding">
                 <div class="col-md-3">
-                    <span class="fas fa-2x fa-bicycle"></span>
+                    <% if transporte.bateria <= 30 %>
+                        <%= image_tag("red_battery", size: "45x35") %>
+                    <% elsif transporte.bateria > 30 && transporte.bateria <= 70 %>
+                        <%= image_tag("yellow_battery", size: "45x35") %>
+                    <% else %>
+                        <%= image_tag("green_battery", size: "45x35") %>
+                    <% end %>
+                    
                 </div>
                 <div class="col-md-9">
-                    <p style="float:right"><b>Cod.</b> : <%= transporte.code %></p>
-                    <p style="float:right"><b>ID</b> : <%= transporte.id %></p>
+                    <div class="row">
+                        <div class="col-12">
+                            <b>Cod.</b> : <%= transporte.code %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <b>ID</b> : <%= transporte.id %>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>

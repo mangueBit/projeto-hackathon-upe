@@ -1,0 +1,10 @@
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  .bikeHistoryInfo {
+    display: inline-block;
+  }
+}
